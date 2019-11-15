@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using time_mgrApi.Models;
 
 namespace time_mgr
 {
@@ -20,7 +22,14 @@ namespace time_mgr
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // requires using Microsoft.Extensions.Options
+            services.Configure<TimeMgrDatabaseSettings>(
+                Configuration.GetSection(nameof(TimeMgrDatabaseSettings)));
 
+            services.AddSingleton<ITimeMgrDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<TimeMgrDatabaseSettings>>().Value);
+
+            services.AddControllers();
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
