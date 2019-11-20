@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using time_mgrApi.Models;
+using time_mgrApi.Services;
 
 namespace time_mgr
 {
@@ -28,6 +29,8 @@ namespace time_mgr
 
             services.AddSingleton<ITimeMgrDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<TimeMgrDatabaseSettings>>().Value);
+
+            services.AddSingleton<TimeEntryService>();
 
             services.AddControllers();
             services.AddControllersWithViews();
