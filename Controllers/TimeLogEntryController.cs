@@ -24,7 +24,7 @@ namespace time_mgr.Controllers
         public ActionResult<List<TimeLogEntry>> Get() =>
             _timeEntryService.Get();
 
-        [HttpGet("{id:length(24)}", Name = "GetBook")]
+        [HttpGet("{id:length(24)}", Name = "GetLog")]
         public ActionResult<TimeLogEntry> Get(string id)
         {
             var log = _timeEntryService.Get(id);
