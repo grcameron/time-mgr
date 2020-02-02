@@ -6,8 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using time_mgrApi.Models;
-using time_mgrApi.Services;
+using time_mgr.Models;
+using time_mgr.Services;
 
 namespace time_mgr
 {
@@ -24,11 +24,11 @@ namespace time_mgr
         public void ConfigureServices(IServiceCollection services)
         {
             // requires using Microsoft.Extensions.Options
-            services.Configure<TimeMgrDatabaseSettings>(
-                Configuration.GetSection(nameof(TimeMgrDatabaseSettings)));
+            // services.Configure<TimeMgrDatabaseSettings>(
+            //     Configuration.GetSection(nameof(TimeMgrDatabaseSettings)));
 
-            services.AddSingleton<ITimeMgrDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<TimeMgrDatabaseSettings>>().Value);
+            // services.AddSingleton<ITimeMgrDatabaseSettings>(sp =>
+            //     sp.GetRequiredService<IOptions<TimeMgrDatabaseSettings>>().Value);
 
             services.AddSingleton<TimeEntryService>();
 

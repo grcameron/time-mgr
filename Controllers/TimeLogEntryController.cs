@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using time_mgrApi.Services;
-using time_mgrApi.Models;
+using time_mgr.Services;
+using time_mgr.Models;
 
 namespace time_mgr.Controllers
 {
@@ -13,66 +13,66 @@ namespace time_mgr.Controllers
     [Route("api/[controller]")]
     public class TimeLogEntryController : ControllerBase
     {
-       private readonly TimeEntryService _timeEntryService;
+    //    private readonly TimeEntryService _timeEntryService;
 
-        public TimeLogEntryController(TimeEntryService timeEntryService)
-        {
-            _timeEntryService = timeEntryService;
-        }
+    //     public TimeLogEntryController(TimeEntryService timeEntryService)
+    //     {
+    //         _timeEntryService = timeEntryService;
+    //     }
 
-        [HttpGet]
-        public ActionResult<List<TimeLogEntry>> Get() =>
-            _timeEntryService.Get();
+    //     [HttpGet]
+    //     public ActionResult<List<TimeLogEntry>> Get() =>
+    //         _timeEntryService.Get();
 
-        [HttpGet("{id:length(24)}", Name = "GetLog")]
-        public ActionResult<TimeLogEntry> Get(string id)
-        {
-            var log = _timeEntryService.Get(id);
+    //     [HttpGet("{id:length(24)}", Name = "GetLog")]
+    //     public ActionResult<TimeLogEntry> Get(string id)
+    //     {
+    //         var log = _timeEntryService.Get(id);
 
-            if (log == null)
-            {
-                return NotFound();
-            }
+    //         if (log == null)
+    //         {
+    //             return NotFound();
+    //         }
 
-            return log;
-        }
+    //         return log;
+    //     }
 
-        [HttpPost]
-        public ActionResult<TimeLogEntry> Create(TimeLogEntry log)
-        {
-            _timeEntryService.Create(log);
+    //     [HttpPost]
+    //     public ActionResult<TimeLogEntry> Create(TimeLogEntry log)
+    //     {
+    //         _timeEntryService.Create(log);
 
-            return CreatedAtRoute("GetLogEntry", new { id = log.Id.ToString() }, log);
-        }
+    //         return CreatedAtRoute("GetLogEntry", new { id = log.Id.ToString() }, log);
+    //     }
 
-        [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, TimeLogEntry logEntryIn)
-        {
-            var log = _timeEntryService.Get(id);
+    //     [HttpPut("{id:length(24)}")]
+    //     public IActionResult Update(string id, TimeLogEntry logEntryIn)
+    //     {
+    //         var log = _timeEntryService.Get(id);
 
-            if (log == null)
-            {
-                return NotFound();
-            }
+    //         if (log == null)
+    //         {
+    //             return NotFound();
+    //         }
 
-            _timeEntryService.Update(id, logEntryIn);
+    //         _timeEntryService.Update(id, logEntryIn);
 
-            return NoContent();
-        }
+    //         return NoContent();
+    //     }
 
-        [HttpDelete("{id:length(24)}")]
-        public IActionResult Delete(string id)
-        {
-            var log = _timeEntryService.Get(id);
+    //     [HttpDelete("{id:length(24)}")]
+    //     public IActionResult Delete(string id)
+    //     {
+    //         var log = _timeEntryService.Get(id);
 
-            if (log == null)
-            {
-                return NotFound();
-            }
+    //         if (log == null)
+    //         {
+    //             return NotFound();
+    //         }
 
-            _timeEntryService.Remove(log.Id);
+    //         _timeEntryService.Remove(log.Id);
 
-            return NoContent();
-        }
+    //         return NoContent();
+    //     }
     }
 }
